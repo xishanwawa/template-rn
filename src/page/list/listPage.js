@@ -42,7 +42,7 @@ export default class Index extends Component {
                 fontSize: 16,
                 color: "#666666"
               }}>
-              权限
+              列表
             </Text>
           }
         />

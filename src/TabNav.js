@@ -2,9 +2,9 @@ import React from "react";
 import { Platform } from "react-native";
 import { createBottomTabNavigator } from "react-navigation";
 
-import HomePage from "./page/home/homePage";
-import TaskPage from "./page/task/taskPage";
-import MinePage from "./page/mine/minePage";
+import HomePage from "./page/common/board/boardPage";
+import TaskPage from "./page/common/business/businessPage";
+import MinePage from "./page/common/mine/minePage";
 
 export const TabNav = createBottomTabNavigator(
   {
