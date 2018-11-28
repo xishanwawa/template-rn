@@ -5,6 +5,7 @@ import TemplateView from "../../common/templateView";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { commonStyles } from "../../styles";
+import Comp from "./comp";
 
 import Immutable from "immutable";
 
@@ -28,7 +29,7 @@ const sections = [
 
 export default class FormPage extends Component {
   static navigationOptions = {
-    title: "详情列表"
+    title: "详情"
   };
   constructor(props) {
     super(props);
@@ -51,64 +52,16 @@ export default class FormPage extends Component {
   componentDidMount = () => {
     global.watch.data = Immutable.fromJS(this.state.initData).toJS();
 
-    global.watch.data.key7 = (
-      <TouchableOpacity
-        onPress={() => {
-          Alert.alert(
-            "",
-            "自定义内容",
-            [
-              { text: "取消", onPress: () => console.log("Cancel Pressed"), style: "cancel" },
-              { text: "确定", onPress: () => console.log("OK Pressed") }
-            ],
-            { cancelable: false }
-          );
-        }}>
-        <View
-          style={{
-            flexDirection: "row"
-          }}>
-          <Text style={{ color: "#666666" }}>{"产品 "}</Text>
-
-          <Image source={require("../../img/book.png")} />
-        </View>
-      </TouchableOpacity>
-    );
+    global.watch.data.key7 = <Comp />;
 
     this.methods.changeInit();
   };
   methods = {
-    onChange: (key, val, childList) => {
-      if (childList.key) {
-        if (childList.handleType == "add") {
-          if (global.watch.data[key] && global.watch.data[key].length > 0) {
-            global.watch.data[key].push({ key1: "ytm", key2: "123" });
-          } else {
-            global.watch.data[key] = [{ key1: "ytm", key2: "123" }];
-          }
-          this.methods.changeInit();
-        }
-        if (childList.handleType == "delete") {
-          global.watch.data[key].splice(childList.index, 1);
-          this.methods.changeInit();
-        }
-        if (childList.handleType == "edit") {
-          global.watch.data[key][childList.index][childList.key] = val;
-        }
-      } else {
-        global.watch.data[key] = val;
-      }
-    },
     changeInit: () => {
       let initData = this.state.initData;
       initData = Object.assign({}, initData, global.watch.data);
 
       this.setState({ initData });
-    },
-    submit: () => {
-      let initData = this.state.initData;
-      global.watch.data = Object.assign({}, initData, global.watch.data);
-      console.log(global.watch.data);
     }
   };
 
@@ -118,9 +71,10 @@ export default class FormPage extends Component {
         <TouchableOpacity
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           onPress={() => {
-            this.methods.submit();
+            const { navigate } = this.props.navigation;
+            navigate("Form", {});
           }}>
-          <Text>保存</Text>
+          <Text>编辑</Text>
         </TouchableOpacity>
       );
     }
@@ -136,20 +90,14 @@ export default class FormPage extends Component {
                 fontSize: 16,
                 color: "#666666"
               }}>
-              {"详情列表"}
+              {"详情"}
             </Text>
           }
           renderRight={this.computed.renderRight()}
           {...this.props}
         />
         <KeyboardAwareScrollView>
-          <TemplateView
-            sections={sections}
-            extraData={this.state.initData}
-            onChange={(key, val, childList) => {
-              this.methods.onChange(key, val, childList);
-            }}
-          />
+          <TemplateView sections={sections} extraData={this.state.initData} />
         </KeyboardAwareScrollView>
       </View>
     );
