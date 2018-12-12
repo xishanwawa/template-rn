@@ -29,6 +29,13 @@ export default class Header extends Component {
 
   computed = {
     renderLeft: () => {
+      if (typeof this.props.renderLeft === "string") {
+        return (
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <Text style={{ color: "#666" }}>{this.props.renderLeft}</Text>
+          </View>
+        );
+      }
       if (this.props.renderLeft) {
         return this.props.renderLeft;
       }
@@ -47,12 +54,27 @@ export default class Header extends Component {
       );
     },
     renderCenter: () => {
+      if (typeof this.props.renderCenter === "string") {
+        return (
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <Text style={{ color: "#666" }}>{this.props.renderCenter}</Text>
+          </View>
+        );
+      }
       if (this.props.renderCenter) {
         return this.props.renderCenter;
       }
       return <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>{this.props.title}</View>;
     },
     renderRight: () => {
+      if (typeof this.props.renderRight === "string") {
+        return (
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <Text style={{ color: "#666" }}>{this.props.renderRight}</Text>
+          </View>
+        );
+      }
+
       if (this.props.renderRight) {
         return this.props.renderRight;
       }
@@ -85,7 +107,7 @@ const styles = StyleSheet.create({
     width: width,
     height: 50,
     backgroundColor: "#ffffff",
-    borderBottomWidth: 0.8,
+    borderBottomWidth: 0.5,
     borderBottomColor: "#dddddd"
   },
   leftCon: {

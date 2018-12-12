@@ -26,7 +26,10 @@ export default class TemplateForm extends Component {
         </View>
       );
     },
-    renderSectionHeader: ({ section: { title } }) => {
+    renderSectionHeader: ({ section }) => {
+      if (section.title == "A") {
+        return <View />;
+      }
       return (
         <View
           style={{
@@ -42,17 +45,25 @@ export default class TemplateForm extends Component {
 
   render() {
     return (
-      <SectionList
-        sections={this.props.sections}
-        extraData={this.props.extraData}
-        renderItem={this.computed.renderItem}
-        renderSectionHeader={this.computed.renderSectionHeader}
-        keyExtractor={this.computed.keyExtractor}
-        initialNumToRender={15}
-        onEndReachedThreshold={0}
-      />
+      <View style={styles.content}>
+        <SectionList
+          sections={this.props.sections}
+          extraData={this.props.extraData}
+          renderItem={this.computed.renderItem}
+          renderSectionHeader={this.computed.renderSectionHeader}
+          keyExtractor={this.computed.keyExtractor}
+          initialNumToRender={15}
+          onEndReachedThreshold={0}
+        />
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  contentHead: {
+    height: 22,
+    backgroundColor: "#ffffff"
+  },
+  content: { paddingTop: 22, backgroundColor: "#f5f5f5" }
+});
