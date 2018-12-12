@@ -61,9 +61,5 @@ export default class TemplateForm extends Component {
 }
 
 const styles = StyleSheet.create({
-  contentHead: {
-    height: 22,
-    backgroundColor: "#ffffff"
-  },
-  content: { paddingTop: 22, backgroundColor: "#f5f5f5" }
+  content: { backgroundColor: "#f5f5f5" }
 });

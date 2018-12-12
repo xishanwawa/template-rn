@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { View, Text, Image, StyleSheet, Alert, TouchableOpacity, Dimensions } from "react-native";
-import { Button } from "antd-mobile-rn";
 const { width, height } = Dimensions.get("window");
 export default class Header extends Component {
   static defaultProps = {

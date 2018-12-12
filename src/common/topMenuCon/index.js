@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, FlatList } from "react-native";
+import { VerticalLine } from "../../common";
 
 export default function TopMenuCon(Props) {
-  return <View style={styles.menu}>{Props.children ? Props.children : null}</View>;
+  let newList = [];
+  Props.children.map((item, index) => {
+    newList.push(item);
+    if (index == Props.children.length - 1) {
+    } else {
+      newList.push(<VerticalLine key={index} />);
+    }
+  });
+  return <View style={styles.menu}>{newList}</View>;
 }
 
 const styles = StyleSheet.create({
