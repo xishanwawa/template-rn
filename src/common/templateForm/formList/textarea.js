@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  NativeModules,
+  DeviceEventEmitter,
+  NativeEventEmitter
+} from "react-native";
 import { List, TextareaItem } from "antd-mobile-rn";
-const { width, height } = Dimensions.get("window");
 import listStyle from "antd-mobile-rn/lib/list/style/index";
 import ITextareaItemStyle from "antd-mobile-rn/lib/textarea-item/style/index";
 
 import { RenderFormTitle } from "./renderFormTitle";
 export default class Textarea extends Component {
+  timer = null;
   static defaultProps = {
     data: {
       title: "表单"
@@ -16,8 +24,69 @@ export default class Textarea extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      value: ""
+    };
   }
+  componentDidMount() {
+    if (NativeModules.EsnCrmCloud) {
+      const EsnCrmCloudNoti = new NativeEventEmitter(NativeModules.EsnCrmCloud);
+      //创建自定义事件接口
+      if (Platform.OS === "ios") {
+        //讯飞
+        this.listener = EsnCrmCloudNoti.addListener("Esn_SpeechToText_Result_Notification", dataBack1 => {
+          // console.log("友空间地图返回数据", JSON.stringify(dataBack));
+          let dataBack = JSON.parse(dataBack1);
+          if (!dataBack && !dataBack.data && !dataBack.data.text) {
+            Toast.info("语音转化失败", 1);
+            return;
+          }
+          let dateStr = dataBack.data.text;
+          this.dealBackAreaData(dateStr);
+        });
+      } else {
+        //讯飞
+        DeviceEventEmitter.addListener("Esn_SpeechToText_Result_Notification", dataBack => {
+          let data = JSON.parse(dataBack);
+          if (!data && !data.data && !data.data.text) {
+            Toast.info("语音转化失败", 1);
+            return;
+          }
+          let dateStr = data.data.text;
+          this.dealBackAreaData(dateStr);
+        });
+      }
+
+      //讯飞
+      this.listener = EsnCrmCloudNoti.addListener("Esn_SpeechToText_Result_Notification", dataBack1 => {
+        // console.log("友空间地图返回数据", JSON.stringify(dataBack));
+        let dataBack = JSON.parse(dataBack1);
+        if (!dataBack && !dataBack.data && !dataBack.data.text) {
+          Toast.info("语音转化失败", 1);
+          return;
+        }
+        let dateStr = dataBack.data.text;
+        this.dealBackAreaData(dateStr);
+      });
+    }
+  }
+
+  dealBackAreaData = dateStrBack => {
+    let value = this.state.value;
+    value = value + dateStrBack;
+    this.setState({ value });
+    this.props.onChange(this.props.tplData.key, value);
+  };
+
+  //处理讯飞语音输入
+  dealAreaInput = () => {
+    if (NativeModules.EsnCrmCloud) {
+      NativeModules.EsnCrmCloud.speechToText();
+    } else {
+      alert("可以在友空间使用，当前环境不支持");
+    }
+  };
+
   methods = {};
 
   computed = {
@@ -57,7 +126,10 @@ export default class Textarea extends Component {
             disabled={this.props.tplData.disabled}
             onChange={val => {
               this.setState({ value: val });
-              this.props.onChange(this.props.tplData.key, val);
+              clearTimeout(this.timer);
+              this.timer = setTimeout(() => {
+                this.props.onChange(this.props.tplData.key, val);
+              }, 500);
             }}
             styles={{
               ...ITextareaItemStyle,
@@ -72,10 +144,19 @@ export default class Textarea extends Component {
                 marginBottom: 10,
                 backgroundColor: "#f5f5f5",
                 fontSize: 14,
-                color: "#333"
+                color: "#666666"
               }
             }}
           />
+          <TouchableOpacity
+            style={{ alignItems: "flex-end", padding: 10 }}
+            onPress={() => {
+              this.dealAreaInput();
+            }}
+            activeOpacity={0.7}
+            focusedOpacity={0.5}>
+            <Text>讯飞语言</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

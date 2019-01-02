@@ -9,6 +9,8 @@ import { RenderFormTitle } from "./renderFormTitle";
 import { inputItemStyleAssign, listItemStyleAssign } from "./style";
 
 export default class Input extends Component {
+  timer = null;
+
   static defaultProps = {
     data: {
       title: "表单"
@@ -44,8 +46,10 @@ export default class Input extends Component {
           disabled={this.props.tplData.disabled}
           defaultValue={this.computed.getDefaultValue()}
           onChange={val => {
-            this.setState({ value: val });
-            this.props.onChange(this.props.tplData.key, val);
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+              this.props.onChange(this.props.tplData.key, val);
+            }, 500);
           }}>
           {<RenderFormTitle {...this.props} />}
         </InputItem>

@@ -24,10 +24,10 @@ export default class LoginPage extends Component {
         <KeyboardAwareScrollView>
           <View style={{ flex: 1, paddingHorizontal: 10, justifyContent: "center", height: ScreenHeight }}>
             <List>
-              <InputItem clear placeholder="交出账号" ref={el => (this.autoFocusInst = el)}>
+              <InputItem clear placeholder="账号" ref={el => (this.autoFocusInst = el)}>
                 <Text>账号</Text>
               </InputItem>
-              <InputItem clear type="password" placeholder="交出银行密码" ref={el => (this.inputRef = el)}>
+              <InputItem clear type="password" placeholder="密码" ref={el => (this.inputRef = el)}>
                 <Text>密码</Text>
               </InputItem>
             </List>
@@ -47,24 +47,6 @@ export default class LoginPage extends Component {
               注册
             </Button>
           </View>
-          {/* <Button
-          onPress={() => {
-            navigate("Form", {});
-          }}
-          title="点我看表单"
-        />
-        <Button
-          onPress={() => {
-            navigate("Main", {});
-          }}
-          title="点我进主页！"
-        />
-        <Button
-          onPress={() => {
-            navigate("Reg", {});
-          }}
-          title="点我进入注册！"
-        /> */}
         </KeyboardAwareScrollView>
       </PageBody>
     );

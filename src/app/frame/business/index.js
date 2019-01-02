@@ -23,7 +23,6 @@ export default class Index extends Component {
       <PageBodyScroll>
         <Grid data={this.state.data} renderItem={this.renderItem} columnNum={2} />
         <WhiteSpace />
-        <Grid data={this.state.data} renderItem={this.renderItem} columnNum={2} />
       </PageBodyScroll>
     );
   }

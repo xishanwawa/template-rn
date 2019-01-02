@@ -76,7 +76,7 @@ export default class EchartsDemo1 extends Component {
       ]
     };
     return (
-      <View style={{ backgroundColor: "#fff" }}>
+      <View style={{ backgroundColor: "#fff", padding: 10 }}>
         <Echarts option={option} height={360} />
       </View>
     );

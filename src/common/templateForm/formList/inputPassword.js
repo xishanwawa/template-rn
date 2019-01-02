@@ -42,7 +42,10 @@ export default class InputPassword extends Component {
           disabled={this.props.tplData.disabled}
           defaultValue={this.computed.getDefaultValue()}
           onChange={val => {
-            this.props.onChange(this.props.tplData.key, val);
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+              this.props.onChange(this.props.tplData.key, val);
+            }, 500);
           }}>
           {<RenderFormTitle {...this.props} />}
         </InputItem>

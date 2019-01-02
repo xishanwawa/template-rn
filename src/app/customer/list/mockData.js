@@ -14,8 +14,8 @@ export const sections = [
   {
     title: "A",
     data: [
-      { title: "单行文本", type: "input", key: "key1", required: true, disabled: true },
-      { title: "多行文本", type: "textarea", key: "key2", required: true },
+      { title: "单行文本", type: "input", key: "key1" },
+      { title: "多行文本", type: "textarea", key: "key2" },
       { title: "数字", type: "number", key: "key3" },
       { title: "百分比", type: "percent", key: "key4" },
       { title: "货币(万元)", type: "money", key: "key5" },

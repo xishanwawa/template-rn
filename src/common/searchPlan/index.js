@@ -151,6 +151,6 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   cancelButtonText: {
-    color: "red"
+    color: "#E14C46"
   }
 });

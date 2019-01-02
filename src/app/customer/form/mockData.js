@@ -21,6 +21,7 @@ export const sections = [
         itemList: [
           { title: "单行文本", type: "input", key: "key1", required: true },
           { title: "数字", type: "number", key: "key2" },
+          { title: "数字11", type: "number", key: "key13" },
           { title: "参照1", type: "referRadio", key: "key12", referType: 1, params: {} }
         ]
       }
@@ -29,7 +30,7 @@ export const sections = [
   {
     title: "标题一",
     data: [
-      { title: "单行文本", type: "input", key: "key1", required: true, disabled: true },
+      { title: "单行文本", type: "input", key: "key1", required: true, disabled: false },
       { title: "多行文本", type: "textarea", key: "key2", required: true },
       { title: "数字", type: "number", key: "key3" },
       { title: "百分比", type: "percent", key: "key4" },
@@ -88,8 +89,8 @@ export const sections = [
 ];
 
 export let initData = {
-  key1: "111",
-  key2: "一三五七九",
+  key1: "",
+  key2: "",
   key3: "123",
   key4: "10",
   key5: "10",

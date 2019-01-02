@@ -75,7 +75,9 @@ export default class QueryPlan extends Component {
           onPress={() => {
             this.setModalVisible(!this.state.modalVisible);
           }}>
-          <Text>{this.state.activity.label ? this.state.activity.label : "查询方案"}</Text>
+          <Text style={{ fontSize: 16, color: "#333333" }}>
+            {this.state.activity.label ? this.state.activity.label : "查询方案"}
+          </Text>
         </TouchableOpacity>
       </View>
     );

@@ -23,6 +23,7 @@ import {
 
 export default class FormCell extends Component {
   static defaultProps = {
+    pushRequired: (tplData, item, subItemIndex) => {},
     data: {
       title: "表单"
     }
@@ -215,8 +216,11 @@ export default class FormCell extends Component {
         <SubList
           tplData={this.props.tplData}
           extraData={data}
-          onChange={(key, val, childKey, childIndex, handleType) => {
-            this.methods.onChange(key, val, childKey, childIndex, handleType);
+          pushRequired={(tplData, item, subItemIndex) => {
+            this.props.pushRequired(tplData, item, subItemIndex);
+          }}
+          onChange={(key, val) => {
+            this.methods.onChange(key, val);
           }}
         />
       );

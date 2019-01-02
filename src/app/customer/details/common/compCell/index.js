@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
-export default class Comp extends Component {
+export default class CompCell extends Component {
   constructor(props) {
     super(props);
   }
@@ -35,7 +35,7 @@ export default class Comp extends Component {
           }}>
           <Text style={{ color: "#666666" }}>{"产品 "}</Text>
 
-          <Image source={require("../../../img/book.png")} />
+          <Image source={require("../../../../../img/book.png")} />
         </View>
       </TouchableOpacity>
     );

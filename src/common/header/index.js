@@ -9,7 +9,7 @@ export default class Header extends Component {
       <Text
         style={{
           fontSize: 16,
-          color: "#666666"
+          color: "#333333"
         }}>
         标题
       </Text>
@@ -56,7 +56,7 @@ export default class Header extends Component {
       if (typeof this.props.renderCenter === "string") {
         return (
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ color: "#666" }}>{this.props.renderCenter}</Text>
+            <Text style={{ color: "#333333", fontSize: 16 }}>{this.props.renderCenter}</Text>
           </View>
         );
       }

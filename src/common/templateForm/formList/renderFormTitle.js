@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   },
   required: {
     width: 10,
-    color: "red"
+    color: "#E14C46",
+    paddingTop: 1
   }
 });

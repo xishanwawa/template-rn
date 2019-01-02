@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { PageBody, Header, TemplateView } from "../../../common";
-import Comp from "./comp";
-import RightBtn from "./rightBtn";
+import { PageBody, ContentBox, Header, TemplateView, TabView } from "../../../common";
+import { RightBtn, CompCell, HeadBoard, CardList } from "./common";
 import { sections, initData } from "./mockData";
 import Immutable from "immutable";
-
 export default class FormPage extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +15,7 @@ export default class FormPage extends Component {
   }
   componentDidMount = () => {
     this.watch.data = Immutable.fromJS(this.state.initData).toJS();
-    this.watch.data.key7 = <Comp />;
+    this.watch.data.key7 = <CompCell />;
     this.setState({ initData: this.watch.data });
   };
 
@@ -33,9 +30,15 @@ export default class FormPage extends Component {
     return (
       <PageBody>
         <Header renderCenter={"详情"} renderRight={<RightBtn onPress={this.methods.onPressRight} />} {...this.props} />
-        <KeyboardAwareScrollView>
-          <TemplateView sections={sections} extraData={this.state.initData} />
-        </KeyboardAwareScrollView>
+        <HeadBoard />
+        <TabView>
+          <ContentBox tabLabel="详情">
+            <TemplateView sections={sections} extraData={this.state.initData} />
+          </ContentBox>
+          <ContentBox tabLabel="相关">
+            <CardList />
+          </ContentBox>
+        </TabView>
       </PageBody>
     );
   }

@@ -88,12 +88,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 16,
     backgroundColor: "#ffffff",
-    paddingBottom: 10
+    paddingBottom: 10,
+    justifyContent: "flex-start",
+    flexWrap: "wrap"
   },
   item: {
     height: 30,
-    width: 100,
-    marginRight: 10,
+    width: 80,
+    marginRight: 4,
+    marginBottom: 10,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: "#ddd",
@@ -102,11 +105,12 @@ const styles = StyleSheet.create({
   },
   actionItem: {
     height: 30,
-    width: 100,
-    marginRight: 10,
+    width: 80,
+    marginRight: 4,
+    marginBottom: 10,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: "red",
+    borderColor: "#E14C46",
     alignItems: "center",
     justifyContent: "center"
   },
@@ -114,6 +118,6 @@ const styles = StyleSheet.create({
     color: "#666666"
   },
   actionText: {
-    color: "red"
+    color: "#E14C46"
   }
 });
